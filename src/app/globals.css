@@ -74,6 +74,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.auth {
+  @apply flex-center min-h-screen w-full bg-zinc-900;
+}
+
 @layer utilities{
   .flex-center {
     @apply flex justify-center items-center;
