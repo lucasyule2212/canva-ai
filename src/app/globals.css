@@ -76,11 +76,103 @@
 }
 
 .auth {
-  @apply flex-center min-h-screen w-full bg-zinc-900;
+  @apply flex-center min-h-screen w-full bg-violet-200;
+}
+.root {
+  @apply flex min-h-screen w-full flex-col bg-white lg:flex-row;
+}
+.root-container {
+  @apply mt-16 flex-1 overflow-auto py-8 lg:mt-0 lg:max-h-screen lg:py-10
 }
 
-@layer utilities{
+/* ========================================== TAILWIND STYLES */
+@layer utilities {
+  /* ===== UTILITIES */
+  .wrapper {
+    @apply max-w-5xl mx-auto px-5 md:px-10 w-full text-dark-400 p-16-regular;
+  }
+
+  .gradient-text {
+    @apply bg-purple-gradient bg-cover bg-clip-text text-transparent;
+  }
+
+  /* ===== ALIGNMENTS */
   .flex-center {
     @apply flex justify-center items-center;
   }
+
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  /* ===== TYPOGRAPHY */
+  /* 44 */
+  .h1-semibold {
+    @apply text-[36px] font-semibold sm:text-[44px] leading-[120%] sm:leading-[56px];
+  }
+
+  /* 36 */
+  .h2-bold {
+    @apply text-[30px] font-bold md:text-[36px] leading-[110%];
+  }
+
+  /* 30 */
+  .h3-bold {
+    @apply font-bold text-[30px] leading-[140%];
+  }
+
+  /* 24 */
+  .p-24-bold {
+    @apply font-bold text-[24px] leading-[120%];
+  }
+
+  /* 20 */
+  .p-20-semibold {
+    @apply font-semibold text-[20px] leading-[140%];
+  }
+
+  .p-20-regular {
+    @apply font-normal text-[20px] leading-[140%];
+  }
+
+  /* 18 */
+  .p-18-semibold {
+    @apply font-semibold text-[18px] leading-[140%];
+  }
+
+  /* 16 */
+  .p-16-semibold {
+    @apply font-semibold text-[16px] leading-[140%];
+  }
+
+  .p-16-medium {
+    @apply font-medium text-[16px] leading-[140%];
+  }
+
+  .p-16-regular {
+    @apply font-normal text-[16px] leading-[140%];
+  }
+
+  /* 14 */
+  .p-14-medium {
+    @apply font-medium text-[14px] leading-[120%];
+  }
+
+  /* 10 */
+  .p-10-medium {
+    @apply font-medium text-[10px] leading-[140%];
+  }
+}
+
+/* =====  CLERK OVERRIDES */
+.cl-userButtonBox {
+  display: flex;
+  flex-flow: row-reverse;
+  gap: 12px;
+}
+
+.cl-userButtonOuterIdentifier {
+  font-size: 16px;
+  font-weight: 600;
+  color: #384262;
 }
