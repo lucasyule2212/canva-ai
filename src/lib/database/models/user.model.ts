@@ -9,6 +9,8 @@ export interface IUser extends Document {
   photo: string;
   planId: string;
   creditBalance: number;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 const UserSchema = new Schema({
@@ -24,6 +26,6 @@ const UserSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const User = models?.image || model('User', UserSchema);
+const User = models?.user || model('User', UserSchema);
 
 export default User;
