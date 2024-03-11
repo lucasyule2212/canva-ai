@@ -1,9 +1,15 @@
-import Header from '@/components/shared/header/header'
-import React from 'react'
+import Header from '@/components/shared/header/header';
+import { transformationTypes } from '@/lib/consts';
 
-const AddTransformationTypePage = () => {
+
+const AddTransformationTypePage = ({ params: { type } }: {
+  params: {
+    type: string
+  }
+}) => {
+  const transformation = transformationTypes[type];
   return (
-    <div><Header title='Transformation title' subtitle='Transformation subtitle'/></div>
+    <div><Header title={transformation.title} subtitle={transformation.subTitle}  /></div>
   )
 }
 
