@@ -14,3 +14,23 @@ declare type UpdateUserParams = {
   username: string;
   photo: string;
 };
+
+// ====== TRANSACTION PARAMS
+
+declare type TransformationTypeKey =
+  | "restore"
+  | "fill"
+  | "remove"
+  | "recolor"
+  | "removeBackground";
+
+// ====== URL QUERY PARAMS
+
+declare type TransformationFormProps = {
+  action: "Add" | "Update";
+  userId: string;
+  type: TransformationTypeKey;
+  creditBalance: number;
+  data?: IImage | null;
+  config?: Transformations | null;
+};
