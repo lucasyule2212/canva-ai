@@ -12,7 +12,6 @@ export interface ITransaction extends Document {
 }
 
 const TransactionSchema = new Schema({
-  _id: { type: String, required: true },
   stripeId: { type: String, required: true, unique: true },
   amount: { type: Number, required: true },
   plan: { type: String },
