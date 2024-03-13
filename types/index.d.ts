@@ -15,6 +15,24 @@ declare type UpdateUserParams = {
   photo: string;
 };
 
+// ====== IMAGE PARAMS
+
+declare type Transformations = {
+  restore?: boolean;
+  fillBackground?: boolean;
+  remove?: {
+    prompt: string;
+    removeShadow?: boolean;
+    multiple?: boolean;
+  };
+  recolor?: {
+    prompt?: string;
+    to: string;
+    multiple?: boolean;
+  };
+  removeBackground?: boolean;
+};
+
 // ====== TRANSACTION PARAMS
 
 declare type TransformationTypeKey =

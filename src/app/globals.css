@@ -85,6 +85,11 @@
   @apply mt-16 flex-1 overflow-auto py-8 lg:mt-0 lg:max-h-screen lg:py-10
 }
 
+/* Transformations forms input field */
+.input-field{
+  @apply rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15 text-dark-600 disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent !important;
+}
+
 /* ========================================== TAILWIND STYLES */
 @layer utilities {
   /* ===== UTILITIES */
