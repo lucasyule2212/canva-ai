@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { FormCustomField } from "./form-custom-field"
 import { updateCredits } from "@/lib/actions/user.actions"
+import MediaUploader from "../media-uploader/media-uploader"
 
 export const formSchema = z.object({
   title: z.string(),
@@ -26,7 +27,7 @@ export const formSchema = z.object({
 
 const TransformationForm = ({ action, data = null, type, creditBalance,config = null }: TransformationFormProps) => {
   const transformationType = transformationTypes[type];
-  const [image, setimage] = useState(data)
+  const [image, setImage] = useState(data)
   const [newTransformation, setnewTransformation] = useState<Transformations | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isTransforming, setIsTransforming] = useState(false)
@@ -52,7 +53,7 @@ const TransformationForm = ({ action, data = null, type, creditBalance,config = 
     
     const onSelectFieldHandler = (field: string, onChange: (value: string) => void) => {
       const imageSize = aspectRatioOptions[field as AspectRatioKey];
-      setimage((prevState:any) => ({ ...prevState, aspectRatio: imageSize.aspectRatio, width: imageSize.width, height: imageSize.height }))
+      setImage((prevState:any) => ({ ...prevState, aspectRatio: imageSize.aspectRatio, width: imageSize.width, height: imageSize.height }))
       
       setnewTransformation(transformationType.config)
     }
@@ -160,6 +161,24 @@ const TransformationForm = ({ action, data = null, type, creditBalance,config = 
               )}
             </div>
           )}
+
+          <div className="grid h-fit min-h-[200px] grid-cols-1 gap-5 py-4 md:grid-cols-2">
+
+            <FormCustomField
+              control={form.control}
+              name="publicId"
+              className="flex size-full flex-col"
+              render={({ field }) => (
+                <MediaUploader
+                onValueChange={field.onChange}
+                setImage={setImage}
+                image={image} 
+                publicId={field.value}
+                type={type}
+              />)}
+            />
+          </div>
+
           <div className="flex w-full gap-4">
             <Button type='button' className="bg-purple-gradient bg-cover rounded-full py-4 px-6 p-16-semibold h-[50px] w-full md:h-[54px] capitalize" disabled={isTransforming || newTransformation === null}
             onClick={onTransformHandler}
@@ -170,6 +189,7 @@ const TransformationForm = ({ action, data = null, type, creditBalance,config = 
             {isSubmitting ? 'Submitting...' :'Save image'}
             </Button>
           </div>
+
         </form>
       </Form>
     )
