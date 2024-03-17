@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { updateCredits } from "@/lib/actions/user.actions"
 import { aspectRatioOptions, defaultValues, transformationTypes } from "@/lib/consts"
 import { AspectRatioKey } from "@/lib/consts/aspectRatios"
 import { debounce, deepMergeObjects } from "@/lib/utils"
@@ -12,9 +13,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { FormCustomField } from "./form-custom-field"
-import { updateCredits } from "@/lib/actions/user.actions"
 import MediaUploader from "../media-uploader/media-uploader"
+import TransformedImage from "../transformed-image/transformed-image"
+import { FormCustomField } from "./form-custom-field"
 
 export const formSchema = z.object({
   title: z.string(),
@@ -176,6 +177,15 @@ const TransformationForm = ({ action, data = null, type, userId, creditBalance, 
                 publicId={field.value}
                 type={type}
               />)}
+            />
+
+            <TransformedImage
+              image={image}
+              type={type}
+              title={form.getValues().title}
+              isTransforming={isTransforming}
+              setIsTransforming={setIsTransforming}
+              transformationConfig={transformationConfig}
             />
           </div>
 
