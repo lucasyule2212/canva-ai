@@ -25,7 +25,7 @@ export const formSchema = z.object({
 })
 
 
-const TransformationForm = ({ action, data = null, type, creditBalance,config = null }: TransformationFormProps) => {
+const TransformationForm = ({ action, data = null, type, userId, creditBalance, config = null }: TransformationFormProps) => {
   const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data)
   const [newTransformation, setnewTransformation] = useState<Transformations | null>(null)
@@ -77,7 +77,7 @@ const TransformationForm = ({ action, data = null, type, creditBalance,config = 
       deepMergeObjects(newTransformation, transformationConfig)
       setnewTransformation(null)
       startTransition(async () => {
-        // await updateCredits(userId, creditFee)
+        await updateCredits(userId, -1)
       })
     }
   
