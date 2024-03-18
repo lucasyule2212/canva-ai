@@ -19,6 +19,7 @@ import { z } from "zod"
 import MediaUploader from "../media-uploader/media-uploader"
 import TransformedImage from "../transformed-image/transformed-image"
 import { FormCustomField } from "./form-custom-field"
+import { InsufficientCreditsModal } from "../insuficient-credits-modal/insuficient-credits-modal"
 
 export const formSchema = z.object({
   title: z.string(),
@@ -147,6 +148,9 @@ const TransformationForm = ({ action, data = null, type, userId, creditBalance, 
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {
+            creditBalance < Math.abs(-1) &&<InsufficientCreditsModal/>
+          }
           <FormCustomField
             control={form.control}
             name="title"
