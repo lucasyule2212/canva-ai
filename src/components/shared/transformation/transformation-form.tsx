@@ -13,13 +13,13 @@ import { debounce, deepMergeObjects } from "@/lib/utils"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { getCldImageUrl } from "next-cloudinary"
 import { useRouter } from "next/navigation"
-import { useState, useTransition } from "react"
+import { useEffect, useState, useTransition } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { InsufficientCreditsModal } from "../insuficient-credits-modal/insuficient-credits-modal"
 import MediaUploader from "../media-uploader/media-uploader"
 import TransformedImage from "../transformed-image/transformed-image"
 import { FormCustomField } from "./form-custom-field"
-import { InsufficientCreditsModal } from "../insuficient-credits-modal/insuficient-credits-modal"
 
 export const formSchema = z.object({
   title: z.string(),
@@ -33,7 +33,7 @@ export const formSchema = z.object({
 const TransformationForm = ({ action, data = null, type, userId, creditBalance, config = null }: TransformationFormProps) => {
   const transformationType = transformationTypes[type];
   const [image, setImage] = useState(data)
-  const [newTransformation, setnewTransformation] = useState<Transformations | null>(null)
+  const [newTransformation, setNewTransformation] = useState<Transformations | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isTransforming, setIsTransforming] = useState(false)
   const [transformationConfig, setTransformationConfig] = useState(config)
@@ -119,12 +119,12 @@ const TransformationForm = ({ action, data = null, type, userId, creditBalance, 
       const imageSize = aspectRatioOptions[field as AspectRatioKey];
       setImage((prevState:any) => ({ ...prevState, aspectRatio: imageSize.aspectRatio, width: imageSize.width, height: imageSize.height }))
       
-      setnewTransformation(transformationType.config)
+      setNewTransformation(transformationType.config)
     }
     
     const onInputChangeHandler = (field: string, value: string, type: TransformationTypeKey, onChange: (value: string) => void) => {
       debounce(() => {
-        setnewTransformation((prevState:any) => ({
+        setNewTransformation((prevState:any) => ({
           ...prevState,
           [type]: {
           ...prevState?.[type],
@@ -135,15 +135,22 @@ const TransformationForm = ({ action, data = null, type, userId, creditBalance, 
       },1000)
   }    
   
-    // TODO: RETURN TO UPDATE CREDITS
     const onTransformHandler = () => {
       setIsTransforming(true)
-      deepMergeObjects(newTransformation, transformationConfig)
-      setnewTransformation(null)
+      setTransformationConfig(
+        deepMergeObjects(newTransformation, transformationConfig)
+      )
+      setNewTransformation(null)
       startTransition(async () => {
         await updateCredits(userId, -1)
       })
+  }
+  
+  useEffect(() => {
+    if (image &&(type === 'restore' || type ==='removeBackground')) {
+      setNewTransformation(transformationType.config)
     }
+  },[image,transformationType.config,type])
   
     return (
       <Form {...form}>
