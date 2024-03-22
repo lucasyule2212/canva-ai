@@ -1,4 +1,4 @@
-import { Document, Schema, model, models } from "mongoose";
+import mongoose, { Document, Schema, model } from "mongoose";
 
 export interface IImage extends Document {
   title: string;
@@ -38,6 +38,6 @@ const ImageSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Image = models?.image || model('Image', ImageSchema);
+const Image = mongoose.models?.Image || model('Image', ImageSchema);
 
 export default Image;
