@@ -8,6 +8,7 @@ import { connectToDatabase } from "../database/mongoose";
 import { handleError } from "../utils";
 
 import { v2 as cloudinary } from 'cloudinary';
+import { env } from "@/env";
 
 const populateUser = (query: any) => query.populate({
   path: 'author',
@@ -102,13 +103,13 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
     await connectToDatabase();
 
     cloudinary.config({
-      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-      api_key: process.env.CLOUDINARY_API_KEY,
-      api_secret: process.env.CLOUDINARY_API_SECRET,
+      cloud_name: env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      api_key: env.CLOUDINARY_API_KEY,
+      api_secret: env.CLOUDINARY_API_SECRET,
       secure: true,
     })
 
-    let expression = 'folder=imaginify';
+    let expression = 'folder=canva_ai';
 
     if (searchQuery) {
       expression += ` AND ${searchQuery}`
