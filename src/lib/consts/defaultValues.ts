@@ -1,7 +1,7 @@
 export const defaultValues = {
-  title: "",
-  aspectRatio: "",
-  color: "",
-  prompt: "",
-  publicId: ""
-};
+  title: '',
+  aspectRatio: '',
+  color: '',
+  prompt: '',
+  publicId: '',
+}

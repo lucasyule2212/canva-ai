@@ -1,23 +1,23 @@
-"use client";
+'use client'
 
-import { CldImage } from "next-cloudinary";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { CldImage } from 'next-cloudinary'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import {
   Pagination,
   PaginationContent,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
-import { transformationTypes } from "@/lib/consts";
-import { IImage } from "@/lib/database/models/image.model";
-import { formUrlQuery } from "@/lib/utils";
+} from '@/components/ui/pagination'
+import { transformationTypes } from '@/lib/consts'
+import { IImage } from '@/lib/database/models/image.model'
+import { formUrlQuery } from '@/lib/utils'
 
-import { Button } from "../../ui/button";
+import { Button } from '../../ui/button'
 
-import { Search } from "./search";
+import { Search } from './search'
 
 export const Collection = ({
   hasSearch = false,
@@ -25,26 +25,26 @@ export const Collection = ({
   totalPages = 1,
   page,
 }: {
-  images: IImage[];
-  totalPages?: number;
-  page: number;
-  hasSearch?: boolean;
+  images: IImage[]
+  totalPages?: number
+  page: number
+  hasSearch?: boolean
 }) => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  const router = useRouter()
+  const searchParams = useSearchParams()
 
   // PAGINATION HANDLER
   const onPageChange = (action: string) => {
-    const pageValue = action === "next" ? Number(page) + 1 : Number(page) - 1;
+    const pageValue = action === 'next' ? Number(page) + 1 : Number(page) - 1
 
     const newUrl = formUrlQuery({
       searchParams: searchParams.toString(),
-      key: "page",
+      key: 'page',
       value: pageValue,
-    });
+    })
 
-    router.push(newUrl, { scroll: false });
-  };
+    router.push(newUrl, { scroll: false })
+  }
 
   return (
     <>
@@ -71,7 +71,7 @@ export const Collection = ({
             <Button
               disabled={Number(page) <= 1}
               className="button w-32 bg-purple-gradient bg-cover text-white"
-              onClick={() => onPageChange("prev")}
+              onClick={() => onPageChange('prev')}
             >
               <PaginationPrevious className="hover:bg-transparent hover:text-white" />
             </Button>
@@ -82,7 +82,7 @@ export const Collection = ({
 
             <Button
               className="button w-32 bg-purple-gradient bg-cover text-white"
-              onClick={() => onPageChange("next")}
+              onClick={() => onPageChange('next')}
               disabled={Number(page) >= totalPages}
             >
               <PaginationNext className="hover:bg-transparent hover:text-white" />
@@ -91,13 +91,16 @@ export const Collection = ({
         </Pagination>
       )}
     </>
-  );
-};
+  )
+}
 
 const Card = ({ image }: { image: IImage }) => {
   return (
     <li>
-      <Link href={`/transformations/${image._id}`} className="flex flex-1 cursor-pointer flex-col gap-5 rounded-[16px] border-2 border-purple-200/15 bg-white p-4 shadow-xl shadow-purple-200/10 transition-all hover:shadow-purple-200/20">
+      <Link
+        href={`/transformations/${image._id}`}
+        className="flex flex-1 cursor-pointer flex-col gap-5 rounded-[16px] border-2 border-purple-200/15 bg-white p-4 shadow-xl shadow-purple-200/10 transition-all hover:shadow-purple-200/20"
+      >
         <CldImage
           src={image.publicId}
           alt={image.title}
@@ -125,5 +128,5 @@ const Card = ({ image }: { image: IImage }) => {
         </div>
       </Link>
     </li>
-  );
-};
+  )
+}

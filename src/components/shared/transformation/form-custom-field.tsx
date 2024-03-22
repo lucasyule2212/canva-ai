@@ -1,6 +1,6 @@
-import React from "react";
-import { Control } from "react-hook-form";
-import { z } from "zod";
+import React from 'react'
+import { Control } from 'react-hook-form'
+import { z } from 'zod'
 
 import {
   FormControl,
@@ -8,17 +8,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
-import { formSchema } from "./transformation-form";
+import { formSchema } from './transformation-form'
 
 type CustomFieldProps = {
-  control: Control<z.infer<typeof formSchema>> | undefined;
-  render: (props: { field: any }) => React.ReactNode;
-  name: keyof z.infer<typeof formSchema>;
-  formLabel?: string;
-  className?: string;
-};
+  control: Control<z.infer<typeof formSchema>> | undefined
+  render: (props: { field: any }) => React.ReactNode
+  name: keyof z.infer<typeof formSchema>
+  formLabel?: string
+  className?: string
+}
 
 export const FormCustomField = ({
   control,
@@ -39,5 +39,5 @@ export const FormCustomField = ({
         </FormItem>
       )}
     />
-  );
-};
+  )
+}

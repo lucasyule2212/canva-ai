@@ -1,7 +1,6 @@
-import { aspectRatioOptions } from "./consts/aspectRatios";
-import { defaultValues } from "./consts/defaultValues";
-import { navLinks } from "./consts/navLinks";
-import { transformationTypes } from "./consts/transformations";
+import { aspectRatioOptions } from './consts/aspectRatios'
+import { defaultValues } from './consts/defaultValues'
+import { navLinks } from './consts/navLinks'
+import { transformationTypes } from './consts/transformations'
 
-export { aspectRatioOptions, defaultValues, navLinks, transformationTypes };
-
+export { aspectRatioOptions, defaultValues, navLinks, transformationTypes }
