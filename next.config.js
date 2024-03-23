@@ -1,10 +1,20 @@
-import { fileURLToPath } from "node:url";
-import createJiti from "jiti";
-const jiti = createJiti(fileURLToPath(import.meta.url));
+import createJiti from 'jiti'
+import { fileURLToPath } from 'node:url'
+const jiti = createJiti(fileURLToPath(import.meta.url))
 
-jiti("./src/env.ts");
+jiti('./src/env.ts')
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+      },
+    ],
+  },
+}
 
-export default nextConfig;
+export default nextConfig
