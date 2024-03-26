@@ -161,8 +161,8 @@ const TransformationForm = ({
           [field === 'prompt' ? 'prompt' : 'to']: value,
         },
       }))
-      return onChange(value)
-    }, 1000)
+    }, 1000)()
+    return onChange(value)
   }
 
   const onTransformHandler = () => {
