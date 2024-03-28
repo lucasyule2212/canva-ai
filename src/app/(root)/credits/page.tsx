@@ -16,16 +16,18 @@ const Credits = async () => {
   const user = await getUserById(userId)
 
   return (
-    <>
+    <div className="h-[85vh]">
       <Header
         title="Buy Credits"
         subtitle="Choose a credit package that suits your needs!"
       />
-
       <section>
-        <ul className="credits-list">
+        <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-9 xl:grid-cols-3">
           {plans.map((plan) => (
-            <li key={plan.name} className="credits-item">
+            <li
+              key={plan.name}
+              className="w-full rounded-[16px] border-2 border-purple-200/20 bg-white p-8 shadow-xl shadow-purple-200/20 lg:max-w-none"
+            >
               <div className="flex-center flex-col gap-3">
                 <Image src={plan.icon} alt="check" width={50} height={50} />
                 <p className="p-20-semibold mt-2 text-purple-500">
@@ -56,7 +58,10 @@ const Credits = async () => {
               </ul>
 
               {plan.name === 'Free' ? (
-                <Button variant="outline" className="credits-btn">
+                <Button
+                  variant="outline"
+                  className="w-full rounded-full bg-purple-100 bg-cover text-purple-500 hover:text-purple-500"
+                >
                   Free Consumable
                 </Button>
               ) : (
@@ -73,7 +78,7 @@ const Credits = async () => {
           ))}
         </ul>
       </section>
-    </>
+    </div>
   )
 }
 
